@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../layout/Main";
 import AddProducts from "../Pages/AddProducts/AddProducts";
+import MyProducts from "../Pages/AddProducts/MyProducts";
 import AdminPanel from "../Pages/AdminPanel/AdminPanel";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
@@ -42,6 +43,11 @@ export const router = createBrowserRouter([
       {
         path:'/admin/:email',element:<PrivateRoute>
           <AdminPanel></AdminPanel>
+        </PrivateRoute>
+      },
+      {
+        path:'/my-products/:email',element:<PrivateRoute>
+          <MyProducts></MyProducts>
         </PrivateRoute>
       }
 

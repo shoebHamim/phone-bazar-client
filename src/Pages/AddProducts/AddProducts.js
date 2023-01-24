@@ -1,12 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../context/AuthProvider';
-import { DayPicker } from 'react-day-picker';
-import { format } from 'date-fns';
+
+import { toast } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 
 const AddProducts = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm()
+  const { register, handleSubmit, formState: { errors },reset } = useForm()
   const {user}=useContext(AuthContext)
   const [selected, setSelected] = React.useState(Date);
   const today =selected.split(' ').slice(1,4).join(' ')
@@ -21,11 +22,13 @@ const AddProducts = () => {
     years_used:duration,
     posting_time:today,
     seller_name:user.displayName,
+    seller_email:user.email,
     img:photo,
     desc:description,
     phone:phone,
+    status:'available',
+    advertise:false
     }
-    // console.log(product);
     fetch('http://localhost:5000/products',{
       method: 'POST',
       headers: {
@@ -34,12 +37,16 @@ const AddProducts = () => {
       body: JSON.stringify(product),
     })
     .then(res=>res.json())
-    .then(console.log(data))
-
+    .then(data=>{
+      reset()
+      toast.success('Product has been added!')
+    })
   }
+
+ 
   return (
     <div>
-      <h1>This is add products for seller</h1>
+      <Link to={`/my-products/${user.email}`} className='btn btn-sm '>My Products</Link>
       <div className='  flex justify-center '>
         <div className='w-96'>
           <h2 className='text-center text-2xl font-semibold'>Add a Product</h2>

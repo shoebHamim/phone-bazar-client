@@ -1,7 +1,7 @@
 import React from 'react';
 import verify from './verify.png'
-const Product = ({ product, setSelectedItem,pay }) => {
-  const { name, location, resale_price, original_price, years_used, posting_time, seller_name, verified, img } = product
+const Product = ({ product, setSelectedItem,pay,deleteProduct,handleAdvertise }) => {
+  const { name,status, location,advertise, resale_price, original_price, years_used, posting_time, seller_name, verified, img } = product
   return (
     <div>
       <div className="card bg-base-100 shadow-xl">
@@ -14,6 +14,10 @@ const Product = ({ product, setSelectedItem,pay }) => {
             <li>Original Price: {original_price}$</li>
             <li>Years Used: {years_used}</li>
             <li>Posting Time: {posting_time}</li>
+            {
+              deleteProduct &&
+            <li>Status: {status}</li>
+            }
             <li className='flex'>Seller Name: {seller_name}
               {verified && <>
                 <img className='w-6 ml-1' src={verify} alt="" />
@@ -32,7 +36,17 @@ const Product = ({ product, setSelectedItem,pay }) => {
               setSelectedItem(product)
             }
             } htmlFor="booking-modal" className="btn btn-primary">Pay</label>
+            }{
+              deleteProduct && <label onClick={() => deleteProduct(product._id)
+              } htmlFor="booking-modal" className="btn btn-primary">Delete</label>
             }
+            {status==='available'&& !advertise&& 
+            <label onClick={()=>handleAdvertise(product._id)}  htmlFor="booking-modal" className="btn btn-success btn-outline ">Advertise</label>
+            }{
+              advertise && <button className='btn' disabled>Advertising</button>
+            }
+
+            
            
 
           </div>
