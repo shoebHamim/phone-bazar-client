@@ -31,7 +31,8 @@ const Signup = () => {
   }
   const OnSubmit = (data) => {
     const {name,address,password,email,accountType}=data
-    const userInfo = {
+    console.log(data);
+   /*  const userInfo = {
       displayName: data.name,
     }
     createUser(email,password)
@@ -40,7 +41,7 @@ const Signup = () => {
           .then(res => saveUserToDB(name,email,address,accountType))
           .catch(e => console.log(e))
       })
-      .catch(error => console.log(error))
+      .catch(error => console.log(error)) */
   }
   
   return (

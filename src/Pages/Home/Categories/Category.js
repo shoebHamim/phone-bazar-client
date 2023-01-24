@@ -11,9 +11,8 @@ const Category = ({ category }) => {
           <h2 className="card-title text-center">{name}</h2>
           <div className="card-actions justify-end">
             <Link to={`category/${cat_id}`}>
-            <button className="btn btn-primary">Buy Now</button>
+            <button className="btn btn-primary">Explore Now</button>
             </Link>
-
           </div>
         </div>
       </div>

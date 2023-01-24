@@ -1,6 +1,6 @@
 import React from 'react';
-
-const Product = ({ product }) => {
+import verify from './verify.png'
+const Product = ({ product, setSelectedItem,pay }) => {
   const { name, location, resale_price, original_price, years_used, posting_time, seller_name, verified, img } = product
   return (
     <div>
@@ -14,11 +14,27 @@ const Product = ({ product }) => {
             <li>Original Price: {original_price}$</li>
             <li>Years Used: {years_used}</li>
             <li>Posting Time: {posting_time}</li>
-            <li>Seller Name: {seller_name}
-            {verified&&<>✔️</>}</li>
+            <li className='flex'>Seller Name: {seller_name}
+              {verified && <>
+                <img className='w-6 ml-1' src={verify} alt="" />
+              </>}</li>
           </ul>
           <div className="card-actions justify-end">
-            <button className="btn btn-primary">Book Now</button>
+            {setSelectedItem &&
+             <label onClick={() => {
+              setSelectedItem(product)
+            }
+            } htmlFor="booking-modal" className="btn btn-primary">Book Now!</label>
+            
+            }
+            {pay &&
+            <label onClick={() => {
+              setSelectedItem(product)
+            }
+            } htmlFor="booking-modal" className="btn btn-primary">Pay</label>
+            }
+           
+
           </div>
         </div>
       </div>
