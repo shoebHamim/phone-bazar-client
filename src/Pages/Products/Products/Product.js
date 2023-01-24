@@ -43,7 +43,7 @@ const Product = ({ product, setSelectedItem,pay,deleteProduct,handleAdvertise })
             {status==='available'&& !advertise&& 
             <label onClick={()=>handleAdvertise(product._id)}  htmlFor="booking-modal" className="btn btn-success btn-outline ">Advertise</label>
             }{
-              advertise && <button className='btn' disabled>Advertising</button>
+              deleteProduct&&advertise && <button className='btn' disabled>Advertising</button>
             }
 
             
