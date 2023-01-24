@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import Product from '../Products/Products/Product';
 const Orders = () => {
