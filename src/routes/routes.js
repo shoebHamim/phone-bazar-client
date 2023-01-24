@@ -6,6 +6,7 @@ import AdminPanel from "../Pages/AdminPanel/AdminPanel";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import Signup from "../Pages/Login/Signup.";
+import NotFound from "../Pages/NotFound/NotFound";
 import Orders from "../Pages/Orders/Orders";
 import Products from "../Pages/Products/Products/Products";
 import PrivateRoute from "./PrivateRoute";
@@ -53,5 +54,7 @@ export const router = createBrowserRouter([
 
 
     ]
+  },{
+    path:'/*',element:<NotFound></NotFound>
   }
 ])

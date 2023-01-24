@@ -4,6 +4,7 @@ const AdminPanel = () => {
   return (
     <div>
       <h2>This is admin panel</h2>
+      
     </div>
   );
 };
