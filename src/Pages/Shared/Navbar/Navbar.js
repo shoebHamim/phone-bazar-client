@@ -7,7 +7,7 @@ import { AuthContext } from '../../../context/AuthProvider';
 
 
 const Navbar = () => {
-  const { user,logOut,loading } = useContext(AuthContext)
+  const { user,logOut } = useContext(AuthContext)
   const userEmail=user?.email
   const [accountType,setAccountType]=useState('user')
   useEffect(()=>{
@@ -16,7 +16,7 @@ const Navbar = () => {
       .then(data=>{
           setAccountType(data.accountType)
       })
-  },[user])
+  },[userEmail])
 
   return (
     <div>
@@ -36,13 +36,13 @@ const Navbar = () => {
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
-          <li><Link>Blog</Link></li>
+          <li><Link to={'/blogs'}>Blogs</Link></li>
 
           </ul>
         </div>
         <div className="navbar-end">
           {user?.uid ? <>
-         <Link to={`/${accountType}/${user.email}`} className=' mr-2'>Dashboard</Link>
+         <Link to={`/${accountType}`} className=' mr-2'>Dashboard</Link>
       
             <Link onClick={logOut}  className="btn btn-sm">Logout</Link>
           </> :

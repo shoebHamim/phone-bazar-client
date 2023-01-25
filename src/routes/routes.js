@@ -1,8 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
+import AdminPanelLayout from "../layout/AdminPanelLayout";
 import Main from "../layout/Main";
 import AddProducts from "../Pages/AddProducts/AddProducts";
 import MyProducts from "../Pages/AddProducts/MyProducts";
-import AdminPanel from "../Pages/AdminPanel/AdminPanel";
+import AllBuyers from "../Pages/AdminPanel/AllBuyers";
+import AllSellers from "../Pages/AdminPanel/AllSellers";
+import Blogs from "../Pages/Blogs/Blogs";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import Signup from "../Pages/Login/Signup.";
@@ -27,11 +30,7 @@ export const router = createBrowserRouter([
       { path: '/login', element: <Login></Login> },
       { path: '/signup', element: <Signup></Signup> },
       {
-        path: '/user/:email',
-        loader:async({params})=>{
-          const email=params.email
-          return fetch(`http://localhost:5000/user/bookings/${email}`)
-        },
+        path: '/user',
          element:
           <PrivateRoute>
             <Orders></Orders>
@@ -42,19 +41,23 @@ export const router = createBrowserRouter([
         </PrivateRoute>
       },
       {
-        path:'/admin/:email',element:<PrivateRoute>
-          <AdminPanel></AdminPanel>
-        </PrivateRoute>
-      },
-      {
         path:'/my-products/:email',element:<PrivateRoute>
           <MyProducts></MyProducts>
         </PrivateRoute>
+      },{
+        path:'/blogs',element:<Blogs></Blogs>
       }
-
-
-    ]
+    ],
+    
   },{
+    path:'/admin',element:<PrivateRoute>
+      <AdminPanelLayout></AdminPanelLayout>
+    </PrivateRoute>,children:[
+      {path:'/admin',element:<AllSellers></AllSellers>},
+      {path:'admin/all-buyers',element:<AllBuyers></AllBuyers>}
+    ]
+  },
+  {
     path:'/*',element:<NotFound></NotFound>
   }
 ])
