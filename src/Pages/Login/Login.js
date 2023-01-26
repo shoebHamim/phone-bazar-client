@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
+import useToken from '../../hooks/useToken';
 
 
 const Login = () => {
@@ -12,6 +13,11 @@ const Login = () => {
   const { register, formState: { errors }, handleSubmit } = useForm()
   const { signIn, signInWithGoogle,loading,setLoading } = useContext(AuthContext)
   const [loginError, setLoginError] = useState()
+  const [userEmail,setUserEmail]=useState()
+  const [token]=useToken(userEmail)
+  if(token){
+    navigate(from, { replace: true })
+  }
   // save user to db for google sign in
   const saveUserToDB = (name, email, address,accountType) => {
     const user = { name: name, email: email, address: address,accountType:accountType }
@@ -32,7 +38,7 @@ const Login = () => {
       .then(res => {
         setLoading(false)
         setLoginError('')
-        navigate(from, { replace: true })
+        setUserEmail(res.user.email)
       })
       .catch(e => {
         setLoginError(e.message)
@@ -42,7 +48,7 @@ const Login = () => {
   const handleSignInWithGoogle = () => {
     signInWithGoogle()
       .then(res => {
-        // navigate('/')
+
         const email= res.user.email
         fetch(`http://localhost:5000/users/${email}`)
         .then(res=>res.json())
@@ -50,7 +56,8 @@ const Login = () => {
           if(JSON.stringify(data) === JSON.stringify({})){
               res= saveUserToDB(email.split('@')[0],email,'','user')
           }
-          navigate(from, { replace: true })
+          setUserEmail(res.user.email)
+         
         })
        
         

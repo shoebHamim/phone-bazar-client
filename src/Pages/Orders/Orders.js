@@ -6,13 +6,19 @@ import Product from '../Products/Products/Product';
 const Orders = () => {
   const {user}=useContext(AuthContext)
   const {data:bookings=[]}=useQuery({queryKey:['bookings'],queryFn:async()=>{
-    const res=await fetch(`http://localhost:5000/user/bookings/${user.email}`)
+    const res=await fetch(`http://localhost:5000/user/bookings/${user.email}`,{
+      headers:{
+        authorization: `bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
     const data=await res.json()
     return data
     },
 
   })
-  // console.log(bookings);
+  if(bookings.message){
+    return <div className='text-xl text-red-600 '>{bookings.message}! </div>
+  }
   return (
     <div>
       <h1 className='text-2xl text-center font-semibold my-6'>My Orders:</h1>
