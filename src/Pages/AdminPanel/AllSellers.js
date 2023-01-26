@@ -5,7 +5,11 @@ import { toast } from 'react-hot-toast';
 const AllSellers = () => {
   const { data: allSellers = [], isLoading, refetch } = useQuery({
     queryKey: ['allUsers'], queryFn: async () => {
-      const res = await fetch('http://localhost:5000/all-sellers')
+      const res = await fetch('http://localhost:5000/all-sellers',{
+        headers:{
+          authorization: `bearer ${localStorage.getItem('accessToken')}`
+        }
+      })
       const data = await res.json()
       return data
     }
@@ -13,13 +17,16 @@ const AllSellers = () => {
   if (isLoading) {
     return <progress className="progress w-56 flex justify-center"></progress>
   }
-  console.log(allSellers);
+  
   const deleteUser=(id)=>{
     const confirmation=window.confirm('Are you sure you want to delete?')
     if(!confirmation){
       return
     }
     fetch(`http://localhost:5000/users/${id}`,{
+      headers:{
+        authorization: `bearer ${localStorage.getItem('accessToken')}`
+      },
       method:'DELETE'
     })
     .then(res=>res.json())
@@ -32,10 +39,9 @@ const AllSellers = () => {
     })
     
   }
-  console.log(allSellers);
   const verifyUser=(id)=>{
     fetch(`http://localhost:5000/users/${id}`,{
-      method:'PUT',
+      method:'PUT'
     })
     .then(res=>res.json())
     .then(data=>{
@@ -44,7 +50,9 @@ const AllSellers = () => {
         refetch()
       }
     })
-
+  }
+  if(allSellers.message){
+    return <div className='text-xl text-red-600 '>{allSellers.message}! </div>
   }
   return (
     <div className='w-full ml-4'>

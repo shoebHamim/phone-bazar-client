@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const useUserType = (email) => {
-  console.log(email);
+
   const [userType,setUserType]=useState()
   const [userTypeLoading,setUserTypeLoading]=useState(true)
   useEffect(()=>{

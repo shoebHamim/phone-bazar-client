@@ -8,7 +8,7 @@ import Navbar from '../Pages/Shared/Navbar/Navbar';
 const DashboardLayout = () => {
   const { user, loading } = useContext(AuthContext)
   const [userType, userTypeLoading] = useUserType(user.email)
-  console.log(userType);
+
 
 
   return (

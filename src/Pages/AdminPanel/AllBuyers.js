@@ -3,7 +3,10 @@ import React from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 const AllBuyers = () => {
   const {data:allBuyers=[],refetch}=useQuery({queryKey:['all-buyers'],queryFn:async()=>{
-    const res=await fetch('http://localhost:5000/all-buyers')
+    const res=await fetch('http://localhost:5000/all-buyers',
+   { headers:{
+      authorization: `bearer ${localStorage.getItem('accessToken')}`
+    }})
     const data=await res.json()
     return data
   }})
@@ -14,6 +17,9 @@ const AllBuyers = () => {
       return
     }
     fetch(`http://localhost:5000/users/${id}`,{
+      headers:{
+        authorization: `bearer ${localStorage.getItem('accessToken')}`
+      },
       method:'DELETE'
     })
     .then(res=>res.json())
