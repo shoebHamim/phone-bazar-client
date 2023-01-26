@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import verify from './verify.png'
-const Product = ({ product, setSelectedItem,pay,deleteProduct,handleAdvertise }) => {
+const Product = ({ product,userType, setSelectedItem,pay,deleteProduct,handleAdvertise }) => {
   const { name,status, location,advertise, resale_price, original_price, years_used, posting_time, seller_name, verified, img } = product
+  const reportProduct=(id)=>{
+      console.log(id);
+      fetch(`http://localhost:5000/products/${id}`,{
+        method:'PUT'
+      })
+      .then(res=>res.json())
+      .then(data=>console.log(data))
+  }
+
   return (
     <div>
       <div className="card bg-base-100 shadow-xl">
@@ -24,12 +33,22 @@ const Product = ({ product, setSelectedItem,pay,deleteProduct,handleAdvertise })
               </>}</li>
           </ul>
           <div className="card-actions justify-end">
-            {setSelectedItem &&
-             <label onClick={() => {
+            {
+               userType==='user' && !product.reported&&
+               <label onClick={()=>reportProduct(product._id)} className='btn btn-sm rounded-full btn-error btn-outline self-center'>Report</label>
+              
+            }{
+              userType==='user' && product.reported&&
+              <label onClick={()=>reportProduct(product._id)} className='btn btn-sm rounded-full btn-error btn-outline self-center' disabled>Reported</label>
+            }
+            
+            {setSelectedItem && <>
+              
+              <label onClick={() => {
               setSelectedItem(product)
             }
             } htmlFor="booking-modal" className="btn btn-primary">Book Now!</label>
-            
+            </>
             }
             {pay &&
             <label onClick={() => {

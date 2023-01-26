@@ -32,6 +32,7 @@ const DashboardLayout = () => {
               <Link to='./all-buyers'>
                 <li>All Buyers</li>
               </Link>
+              <Link to={'./reported-items'}>Reported Items</Link>
             </>}
             {/* seller */}
             {userType === 'seller' && <>

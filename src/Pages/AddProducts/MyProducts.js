@@ -50,9 +50,9 @@ const MyProducts = () => {
   return (
     <div>
 
-      <h2 className='text-xl font-semibold text-center'>My Orders</h2>
+      <h2 className='text-xl font-semibold text-center'>My Products</h2>
       <div className='grid sm:grid-cols-2 gap-8 m-4'>
-        {products.map(p => <Product product={p} handleAdvertise={handleAdvertise} key={p._id} deleteProduct={handleDelete}></Product>)}
+        {products.map(p => <Product product={p}  handleAdvertise={handleAdvertise} key={p._id} deleteProduct={handleDelete}></Product>)}
        </div>
 
     </div>
