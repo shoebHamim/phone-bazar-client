@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import AdminPanelLayout from "../layout/AdminPanelLayout";
+import DashboardLayout from "../layout/DashboardLayout";
 import Main from "../layout/Main";
 import AddProducts from "../Pages/AddProducts/AddProducts";
 import MyProducts from "../Pages/AddProducts/MyProducts";
@@ -30,34 +30,24 @@ export const router = createBrowserRouter([
       { path: '/login', element: <Login></Login> },
       { path: '/signup', element: <Signup></Signup> },
       {
-        path: '/user',
-         element:
-          <PrivateRoute>
-            <Orders></Orders>
-          </PrivateRoute>
-      },{
-        path:'/seller/',element:<PrivateRoute>
-          <AddProducts></AddProducts>
-        </PrivateRoute>
-      },
-      {
-        path:'/my-products/:email',element:<PrivateRoute>
-          <MyProducts></MyProducts>
-        </PrivateRoute>
-      },{
         path:'/blogs',element:<Blogs></Blogs>
       }
     ],
-    
   },{
-    path:'/admin',element:<PrivateRoute>
-      <AdminPanelLayout></AdminPanelLayout>
+    path:'/dashboard',element:<PrivateRoute>
+      <DashboardLayout></DashboardLayout>
     </PrivateRoute>,children:[
-      {path:'/admin',element:<AllSellers></AllSellers>},
-      {path:'admin/all-buyers',element:<AllBuyers></AllBuyers>}
+      {path:'/dashboard/add-product',element: <AddProducts></AddProducts>},
+      {path:'/dashboard/my-products',element: <MyProducts></MyProducts>},
+      {path:'/dashboard/all-sellers',element: <AllSellers></AllSellers>},
+      {path:'/dashboard/all-buyers',element: <AllBuyers></AllBuyers>},
+      {path:'/dashboard/my-orders',element: <Orders></Orders>},
     ]
-  },
-  {
+  }
+  
+  
+  
+  ,{
     path:'/*',element:<NotFound></NotFound>
   }
 ])

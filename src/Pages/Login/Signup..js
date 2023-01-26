@@ -92,8 +92,7 @@ const Signup = () => {
             <option value={'user'} selected>User</option>
             <option value={'seller'}>Seller</option>
           </select>
-            <label className="label"><span className="label-text">
-              Forgot Password?</span></label>
+            
           <input value={'Register'} className='btn w-full my-4' type="submit" />
          {loading&&  <progress className="progress text-center"></progress>}
         </form>

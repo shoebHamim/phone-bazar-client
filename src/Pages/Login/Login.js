@@ -1,3 +1,4 @@
+import { async } from '@firebase/util';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -11,7 +12,21 @@ const Login = () => {
   const { register, formState: { errors }, handleSubmit } = useForm()
   const { signIn, signInWithGoogle,loading,setLoading } = useContext(AuthContext)
   const [loginError, setLoginError] = useState()
-
+  // save user to db for google sign in
+  const saveUserToDB = (name, email, address,accountType) => {
+    const user = { name: name, email: email, address: address,accountType:accountType }
+    fetch('http://localhost:5000/users', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(user),
+    })
+      .then(res => res.json())
+      .then(data => {
+        return data
+      })
+  }
   const handleLogin = data => {
     signIn(data.email, data.password)
       .then(res => {
@@ -27,9 +42,18 @@ const Login = () => {
   const handleSignInWithGoogle = () => {
     signInWithGoogle()
       .then(res => {
-        navigate(from, { replace: true })
+        // navigate('/')
+        const email= res.user.email
+        fetch(`http://localhost:5000/users/${email}`)
+        .then(res=>res.json())
+        .then(data=>{
+          if(JSON.stringify(data) === JSON.stringify({})){
+              res= saveUserToDB('',email,'','user')
+          }
+          navigate(from, { replace: true })
+        })
+       
         
-        console.log(res)
       })
       .catch(e => console.log(e))
   }

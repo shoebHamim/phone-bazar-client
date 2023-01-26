@@ -53,8 +53,7 @@ const AddProducts = () => {
  
   return (
     <div>
-      <Link to={`/my-products/${user.email}`} className='btn btn-sm '>My Products</Link>
-      <div className='  flex justify-center '>
+      <div className='flex justify-center '>
         <div className='w-96'>
           <h2 className='text-center text-2xl font-semibold'>Add a Product</h2>
           <form onSubmit={handleSubmit(onSubmit)} >
