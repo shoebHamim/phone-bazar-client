@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../context/AuthProvider';
 
@@ -7,54 +7,60 @@ import { Link } from 'react-router-dom';
 
 
 const AddProducts = () => {
-  const { register, handleSubmit, formState: { errors },reset } = useForm()
-  const {user}=useContext(AuthContext)
+  const { register, handleSubmit, formState: { errors }, reset } = useForm()
+  const { user } = useContext(AuthContext)
   const [selected, setSelected] = React.useState(Date);
-  const today =selected.split(' ').slice(1,4).join(' ')
-  const [user_db,setUser_db]=useState()
-  const onSubmit = (data) => {
+  const today = selected.split(' ').slice(1, 4).join(' ')
+
+  // getting user's info from mongodb for their verification status
+  const [user_db, setUser_db] = useState()
+  useEffect(()=>{
     fetch(`http://localhost:5000/users/${user.email}`)
     .then(res=>res.json())
     .then(data=>setUser_db(data))
-    console.log(user_db);
-    const {name,location,description,originalPrice,resellPrice,phone,photo,productType,productCondition,duration}=data
-    const product={
-    cat_id:parseInt(productType),
-    name:name,
-    location:location,
-    resale_price:resellPrice,
-    original_price:originalPrice,
-    years_used:duration,
-    posting_time:today,
-    seller_name:user.displayName,
-    seller_email:user.email,
-    img:photo,
-    desc:description,
-    phone:phone,
-    status:'available',
-    advertise:false,
-    verified: user_db.verified
+  },[])
+  console.log(user_db);
+  
+ 
+  const onSubmit = (data) => {
+    const { name, location, description, originalPrice, resellPrice, phone, photo, productType, productCondition, duration } = data
+    const product = {
+      cat_id: parseInt(productType),
+      name: name,
+      location: location,
+      resale_price: resellPrice,
+      original_price: originalPrice,
+      years_used: duration,
+      posting_time: today,
+      seller_name: user.displayName,
+      seller_email: user.email,
+      img: photo,
+      desc: description,
+      phone: phone,
+      status: 'available',
+      advertise: false,
+      verified: user_db.verified
     }
     // console.log(product);
-    fetch('http://localhost:5000/products',{
+    fetch('http://localhost:5000/products', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
       },
       body: JSON.stringify(product),
     })
-    .then(res=>res.json())
-    .then(data=>{
-      reset()
-      toast.success('Product has been added!')
-    })
+      .then(res => res.json())
+      .then(data => {
+        reset()
+        toast.success('Product has been added!')
+      })
   }
 
- 
+
   return (
     <div>
       <div className='flex justify-center '>
-        <div className='w-96'>
+        <div className='sm:w-96'>
           <h2 className='text-center text-2xl font-semibold'>Add a Product</h2>
           <form onSubmit={handleSubmit(onSubmit)} >
             <div className="form-control w-full">

@@ -17,7 +17,7 @@ if(!advertised.length){
   return (
     <div>
       <h1 className='text-2xl text-center my-8 font-semibold'>Advertisements</h1>
-      <div  className='grid lg:grid-cols-2'>
+      <div  className='grid sm:grid-cols-2 gap-8'>
         {advertised.map(p=><Product product={p} key={p._id}></Product>)}
       </div>
     </div>

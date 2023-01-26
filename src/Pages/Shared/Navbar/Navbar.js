@@ -24,7 +24,7 @@ const Navbar = () => {
         
             </ul>
           </div>
-          <Link to={'/'} className="btn btn-ghost normal-case text-xl"> 
+          <Link to={'/'} className="btn p-0 md:px-2 btn-ghost normal-case text-xl"> 
           <img className='w-8' src={logo} alt="" />
           Phone Bazar</Link>
         </div>
@@ -37,7 +37,7 @@ const Navbar = () => {
         <div className="navbar-end">
           {user?.uid ? <>
          <Link to={`/dashboard/`} className=' mr-2'>Dashboard</Link>
-          <Link onClick={logOut}  className="btn btn-sm">Logout</Link>
+          <Link onClick={logOut}  className="btn btn-xs sm:btn-sm">Logout</Link>
           </> :
             <Link to={'/login'} className="btn">Login</Link>      
             }

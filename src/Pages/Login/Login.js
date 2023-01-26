@@ -48,7 +48,7 @@ const Login = () => {
         .then(res=>res.json())
         .then(data=>{
           if(JSON.stringify(data) === JSON.stringify({})){
-              res= saveUserToDB('',email,'','user')
+              res= saveUserToDB(email.split('@')[0],email,'','user')
           }
           navigate(from, { replace: true })
         })
