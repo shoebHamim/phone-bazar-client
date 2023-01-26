@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
             <Orders></Orders>
           </PrivateRoute>
       },{
-        path:'/seller/:email',element:<PrivateRoute>
+        path:'/seller/',element:<PrivateRoute>
           <AddProducts></AddProducts>
         </PrivateRoute>
       },

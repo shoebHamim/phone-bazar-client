@@ -15,8 +15,8 @@ const Categories = () => {
 
   return (
     <>
-    <h1 className='mt-12 text-2xl font-bold text-center mb-8' >Choose Your Desired Category</h1>
-    <div className='grid sm:grid-cols-2 gap-8 items-center   justify-items-center'>
+    <h1 className='mt-12  text-2xl font-bold text-center mb-8' >Choose Your Desired Category</h1>
+    <div className='grid sm:grid-cols-3 gap-8'>
      {categories.map(c=><Category category={c} key={c._id}></Category>)}
 
 

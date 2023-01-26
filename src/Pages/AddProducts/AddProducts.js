@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../context/AuthProvider';
 
@@ -11,7 +11,12 @@ const AddProducts = () => {
   const {user}=useContext(AuthContext)
   const [selected, setSelected] = React.useState(Date);
   const today =selected.split(' ').slice(1,4).join(' ')
+  const [user_db,setUser_db]=useState()
   const onSubmit = (data) => {
+    fetch(`http://localhost:5000/users/${user.email}`)
+    .then(res=>res.json())
+    .then(data=>setUser_db(data))
+    console.log(user_db);
     const {name,location,description,originalPrice,resellPrice,phone,photo,productType,productCondition,duration}=data
     const product={
     cat_id:parseInt(productType),
@@ -27,8 +32,10 @@ const AddProducts = () => {
     desc:description,
     phone:phone,
     status:'available',
-    advertise:false
+    advertise:false,
+    verified: user_db.verified
     }
+    // console.log(product);
     fetch('http://localhost:5000/products',{
       method: 'POST',
       headers: {

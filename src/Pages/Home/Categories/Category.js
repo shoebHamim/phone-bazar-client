@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 const Category = ({ category }) => {
   const { cat_id, img, name } = category
   return (
-    <div className='self-auto'>
-      <div className="card card-compact  bg-base-100 shadow-xl">
+    <div className=''>
+      <div className="card card-compact bg-base-100 shadow-xl">
         <figure><img src={img} alt="Shoes" /></figure>
         <div className="card-body">
           <h2 className="card-title text-center">{name}</h2>

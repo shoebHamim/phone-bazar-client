@@ -30,6 +30,21 @@ const AllSellers = () => {
         
       }
     })
+    
+  }
+  console.log(allSellers);
+  const verifyUser=(id)=>{
+    fetch(`http://localhost:5000/users/${id}`,{
+      method:'PUT',
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      if(data.acknowledged){
+        toast.success('Seller is now verified!')
+        refetch()
+      }
+    })
+
   }
   return (
     <div className='w-full ml-4'>
@@ -40,8 +55,9 @@ const AllSellers = () => {
             <tr>
               <th></th>
               <th>Name</th>
-            
+              <th>Email</th>
               <th>Action</th>
+              <th>Verify</th>
             </tr>
           </thead>
           <tbody>
@@ -49,8 +65,13 @@ const AllSellers = () => {
               <tr key={seller._id} className="hover">
               <th>{i+1}</th>
               <td>{seller.name}</td>
+              <td>{seller.email}</td>
             
               <td><button onClick={()=>deleteUser(seller._id)} className='btn btn-error btn-sm'>Delete</button></td>
+              <td> 
+                {seller.verified? <button className='btn-sm btn ' disabled >Verified</button>:
+                <button onClick={()=>verifyUser(seller._id)} className='btn btn-sm btn-outline btn-success'>Verify</button>}
+                </td>
               </tr>
 
             )}
