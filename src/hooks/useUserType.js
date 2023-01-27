@@ -6,7 +6,7 @@ const useUserType = (email) => {
   const [userTypeLoading,setUserTypeLoading]=useState(true)
   useEffect(()=>{
     if(email){
-      fetch(`http://localhost:5000/users/${email}`)
+      fetch(`https://phone-bazar-server.vercel.app/users/${email}`)
       .then(res=>res.json())
       .then(data=>{
         setUserType(data.accountType)

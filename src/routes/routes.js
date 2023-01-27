@@ -23,7 +23,7 @@ export const router = createBrowserRouter([
       {
         path: '/category/:id', loader: async ({ params }) => {
           const cat_id = params.id
-          return fetch(`http://localhost:5000/category/${cat_id}`)
+          return fetch(`https://phone-bazar-server.vercel.app/category/${cat_id}`)
         },
         element: <PrivateRoute>
           <Products></Products>,
@@ -47,7 +47,7 @@ export const router = createBrowserRouter([
       {path:'/dashboard/my-orders',element: <Orders></Orders>},
       {path:'/dashboard/reported-items',element: <ReportedItems></ReportedItems>},
       {path:'/dashboard/payment/:id',element: <Payment></Payment>,loader:({params})=>{
-        return fetch(`http://localhost:5000/bookings/${params.id}`)
+        return fetch(`https://phone-bazar-server.vercel.app/bookings/${params.id}`)
       }},
     ]
   }

@@ -5,12 +5,13 @@ import Category from './Category';
 
 
 const Categories = () => {
+  const [loading,setLoading]=useState(true)
   const [categories,setCategories]=useState([])
   // using axios for categories api call 
-  axios.get('http://localhost:5000/categories')
+  axios.get('https://phone-bazar-server.vercel.app/categories')
   .then(function (res) {
     setCategories(res.data)
-    
+    setLoading(false)
   })
   .catch(function (error) {
     console.log(error);
@@ -26,6 +27,11 @@ const Categories = () => {
   //       return data
   //     }
   //   })
+  if(loading){
+    return <div className='text-center'>
+      <progress className="progress  w-56"></progress>
+    </div>
+  }
 
   return (
     <>

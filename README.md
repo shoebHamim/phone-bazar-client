@@ -1,5 +1,5 @@
 # Phone Bazar
-## live site: 
+## live site: https://phone-bazar-97325.web.app/
 ### Project Features:
 1. Phone Bazar is a simple site for selling and buying used mobile phones built with React,DaisyUi,MongoDB
 2. An user can sign up in the site as a seller or a buyer with his/her email and can also sign up with google

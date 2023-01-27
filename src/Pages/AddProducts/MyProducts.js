@@ -10,7 +10,7 @@ const MyProducts = () => {
   const { user } = useContext(AuthContext)
   const { data: products = [], refetch } = useQuery({
     queryKey: ['products'], queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/my-products/${user.email}`)
+      const res = await fetch(`https://phone-bazar-server.vercel.app/my-products/${user.email}`)
       const data = await res.json()
       return data
     }
@@ -21,7 +21,10 @@ const MyProducts = () => {
     const confirm = window.confirm('Are you sure you want to delete?')
     if (confirm) {
       console.log(id);
-      fetch(`http://localhost:5000/my-products/${id}`, {
+      fetch(`https://phone-bazar-server.vercel.app/my-products/${id}`, {
+        headers:{
+          authorization:`bearer ${localStorage.getItem('accessToken')}`
+        },
         method: 'DELETE'
       })
         .then(res => res.json())
@@ -34,7 +37,7 @@ const MyProducts = () => {
     }
   }
   const handleAdvertise = (id) => {
-    fetch(`http://localhost:5000/my-products/${id}`, {
+    fetch(`https://phone-bazar-server.vercel.app/my-products/${id}`, {
       method: 'PUT'
     })
       .then(res => res.json())

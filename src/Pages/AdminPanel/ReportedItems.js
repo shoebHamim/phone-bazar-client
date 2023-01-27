@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 const ReportedItems = () => {
   const {data:reportedItems=[],refetch}=useQuery({queryKey:['reported-items'],
 queryFn:async()=>{
-  const res=await fetch('http://localhost:5000/products/reported',{
+  const res=await fetch('https://phone-bazar-server.vercel.app/products/reported',{
     headers:{authorization:
     `bearer ${localStorage.getItem('accessToken')}`}
   })
@@ -20,8 +20,10 @@ const handleDelete = (id) => {
   const confirm = window.confirm('Are you sure you want to delete?')
   if (confirm) {
     console.log(id);
-    fetch(`http://localhost:5000/my-products/${id}`, {
-      method: 'DELETE'
+    fetch(`https://phone-bazar-server.vercel.app/my-products/${id}`, {
+      method: 'DELETE',
+      headers:{authorization:
+        `bearer ${localStorage.getItem('accessToken')}`}
     })
       .then(res => res.json())
       .then(data => {

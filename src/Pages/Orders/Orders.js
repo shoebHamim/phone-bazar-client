@@ -6,7 +6,7 @@ import Product from '../Products/Products/Product';
 const Orders = () => {
   const {user}=useContext(AuthContext)
   const {data:bookings=[]}=useQuery({queryKey:['bookings'],queryFn:async()=>{
-    const res=await fetch(`http://localhost:5000/user/bookings/${user.email}`,{
+    const res=await fetch(`https://phone-bazar-server.vercel.app/user/bookings/${user.email}`,{
       headers:{
         authorization: `bearer ${localStorage.getItem('accessToken')}`
       }
@@ -23,7 +23,7 @@ const Orders = () => {
   return (
     <div>
       <h1 className='text-2xl text-center font-semibold my-6'>My Orders:</h1>
-      <div className='grid grid-cols-2 gap-8'>
+      <div className='grid sm:grid-cols-2 gap-8'>
       {bookings.map(b=>
         <Product key={b._id} product={b.product} pay={b}></Product>)}
       </div>

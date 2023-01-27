@@ -17,7 +17,7 @@ const Checkout = ({ booking }) => {
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
 
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://phone-bazar-server.vercel.app/create-payment-intent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -82,7 +82,7 @@ const Checkout = ({ booking }) => {
 
 
       }
-      fetch('http://localhost:5000/payments',{
+      fetch('https://phone-bazar-server.vercel.app/payments',{
         method:'POST',
         headers:{
           'content-type':'application/json'
@@ -92,12 +92,12 @@ const Checkout = ({ booking }) => {
       })
       .then(res=>res.json())
       .then(data=>{
-        fetch(`http://localhost:5000/products/paid/${booking.product._id}`,{
+        fetch(`https://phone-bazar-server.vercel.app/products/paid/${booking.product._id}`,{
           method:'PUT'
         })
         .then(res=>res.json())
         .then(data=>{
-          fetch(`http://localhost:5000/bookings/${booking._id}`,{
+          fetch(`https://phone-bazar-server.vercel.app/bookings/${booking._id}`,{
             method:'PUT'
           })
           .then(res=>res.json())

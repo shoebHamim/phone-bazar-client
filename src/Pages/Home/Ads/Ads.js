@@ -5,7 +5,7 @@ import Product from '../../Products/Products/Product';
 const Ads = () => {
   const {data:advertised=[]}=useQuery({queryKey:['advertised'],
 queryFn:async()=>{
-  const res= await fetch('http://localhost:5000/products/advertised')
+  const res= await fetch('https://phone-bazar-server.vercel.app/products/advertised')
   const data= await res.json()
   return data
 }})

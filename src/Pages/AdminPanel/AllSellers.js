@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 const AllSellers = () => {
   const { data: allSellers = [], isLoading, refetch } = useQuery({
     queryKey: ['allUsers'], queryFn: async () => {
-      const res = await fetch('http://localhost:5000/all-sellers',{
+      const res = await fetch('https://phone-bazar-server.vercel.app/all-sellers',{
         headers:{
           authorization: `bearer ${localStorage.getItem('accessToken')}`
         }
@@ -23,7 +23,7 @@ const AllSellers = () => {
     if(!confirmation){
       return
     }
-    fetch(`http://localhost:5000/users/${id}`,{
+    fetch(`https://phone-bazar-server.vercel.app/users/${id}`,{
       headers:{
         authorization: `bearer ${localStorage.getItem('accessToken')}`
       },
@@ -40,7 +40,7 @@ const AllSellers = () => {
     
   }
   const verifyUser=(id)=>{
-    fetch(`http://localhost:5000/users/${id}`,{
+    fetch(`https://phone-bazar-server.vercel.app/users/${id}`,{
       method:'PUT'
     })
     .then(res=>res.json())

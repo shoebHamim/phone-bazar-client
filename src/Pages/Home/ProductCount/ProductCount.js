@@ -6,7 +6,7 @@ import flagshipPhone from './smartphone (4).png'
 const ProductCount = () => {
   const {data:products=[]}=useQuery({queryKey:['all-product'],
   queryFn:async()=>{
-    const res= await fetch('http://localhost:5000/products')
+    const res= await fetch('https://phone-bazar-server.vercel.app/products')
     const data=await res.json()
     return data
   }})

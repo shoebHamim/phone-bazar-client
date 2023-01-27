@@ -15,7 +15,7 @@ const AddProducts = () => {
   // getting user's info from mongodb for their verification status
   const [user_db, setUser_db] = useState()
   useEffect(()=>{
-    fetch(`http://localhost:5000/users/${user.email}`)
+    fetch(`https://phone-bazar-server.vercel.app/users/${user.email}`)
     .then(res=>res.json())
     .then(data=>setUser_db(data))
   },[])
@@ -41,7 +41,7 @@ const AddProducts = () => {
       verified: user_db.verified
     }
     // console.log(product);
-    fetch('http://localhost:5000/products', {
+    fetch('https://phone-bazar-server.vercel.app/products', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'

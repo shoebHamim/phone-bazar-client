@@ -6,7 +6,7 @@ const Product = ({ product,userType, setSelectedItem,pay,deleteProduct,handleAdv
   const { name,status, location,advertise, resale_price, original_price, years_used, posting_time, seller_name, verified, img } = product
   const reportProduct=(id)=>{
       console.log(id);
-      fetch(`http://localhost:5000/products/${id}`,{
+      fetch(`https://phone-bazar-server.vercel.app/products/${id}`,{
         method:'PUT'
       })
       .then(res=>res.json())

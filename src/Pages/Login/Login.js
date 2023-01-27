@@ -21,7 +21,7 @@ const Login = () => {
   // save user to db for google sign in
   const saveUserToDB = (name, email, address,accountType) => {
     const user = { name: name, email: email, address: address,accountType:accountType }
-    fetch('http://localhost:5000/users', {
+    fetch('https://phone-bazar-server.vercel.app/users', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -50,7 +50,7 @@ const Login = () => {
       .then(res => {
 
         const email= res.user.email
-        fetch(`http://localhost:5000/users/${email}`)
+        fetch(`https://phone-bazar-server.vercel.app/users/${email}`)
         .then(res=>res.json())
         .then(data=>{
           if(JSON.stringify(data) === JSON.stringify({})){

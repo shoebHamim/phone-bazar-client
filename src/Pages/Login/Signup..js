@@ -16,7 +16,7 @@ const Signup = () => {
 
   const saveUserToDB = (name, email, address,accountType) => {
     const user = { name: name, email: email, address: address,accountType:accountType }
-    fetch('http://localhost:5000/users', {
+    fetch('https://phone-bazar-server.vercel.app/users', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'

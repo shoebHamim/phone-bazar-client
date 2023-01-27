@@ -14,7 +14,7 @@ const BookingModal = ({ user, selectedItem }) => {
       meetingLocaton: form.meetingLocation.value,
       phone: form.phone.value,
     }
-    fetch('http://localhost:5000/bookings', {
+    fetch('https://phone-bazar-server.vercel.app/bookings', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
