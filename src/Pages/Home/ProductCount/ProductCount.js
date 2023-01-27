@@ -19,21 +19,21 @@ const ProductCount = () => {
         <img src={budgetPhone} alt="" />
         <div>
         <p className='text-lg'>Budget Phone</p>
-        <p className='font-semibold'>Total Ads: {products.filter(p=>p.cat_id===1).length}</p>
+        <p className='font-semibold'>Total Ads: {products.filter(p=>p.cat_id===1&&p.status==='available').length}</p>
         </div>
       </div>
       <div className='flex items-center'>
         <img src={midrangePhone} alt="" />
         <div>
         <p className='text-lg'>Midrange Phone</p>
-        <p className='font-semibold'>Total Ads: {products.filter(p=>p.cat_id===2).length}</p>
+        <p className='font-semibold'>Total Ads: {products.filter(p=>p.cat_id===2&&p.status==='available').length}</p>
         </div>
       </div>
       <div className='flex items-center'>
         <img src={flagshipPhone} alt="" />
         <div>
         <p className='text-lg'>Flagship Phone</p>
-        <p className='font-semibold'>Total Ads: {products.filter(p=>p.cat_id===3).length}</p>
+        <p className='font-semibold'>Total Ads: {products.filter(p=>p.cat_id===3&&p.status==='available').length}</p>
         </div>
       </div>
       </div>

@@ -25,7 +25,7 @@ const Orders = () => {
       <h1 className='text-2xl text-center font-semibold my-6'>My Orders:</h1>
       <div className='grid grid-cols-2 gap-8'>
       {bookings.map(b=>
-        <Product key={b._id} product={b.product} pay={b.product}></Product>)}
+        <Product key={b._id} product={b.product} pay={b}></Product>)}
       </div>
     </div>
   );

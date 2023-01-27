@@ -3,6 +3,7 @@ import { Link, Outlet } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider';
 import useUserType from '../hooks/useUserType';
 import MyProducts from '../Pages/AddProducts/MyProducts';
+import AllBuyers from '../Pages/AdminPanel/AllBuyers';
 import Navbar from '../Pages/Shared/Navbar/Navbar';
 
 const DashboardLayout = () => {

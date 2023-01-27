@@ -5,11 +5,17 @@ import { toast } from 'react-hot-toast';
 const ReportedItems = () => {
   const {data:reportedItems=[],refetch}=useQuery({queryKey:['reported-items'],
 queryFn:async()=>{
-  const res=await fetch('http://localhost:5000/products/reported')
+  const res=await fetch('http://localhost:5000/products/reported',{
+    headers:{authorization:
+    `bearer ${localStorage.getItem('accessToken')}`}
+  })
   const data = await res.json()
-  console.log(data);
   return data
 }})
+console.log(reportedItems);
+if(reportedItems.message){
+  return <div className='text-2xl text-red-600'>{reportedItems.message}</div>
+}
 const handleDelete = (id) => {
   const confirm = window.confirm('Are you sure you want to delete?')
   if (confirm) {
@@ -19,7 +25,6 @@ const handleDelete = (id) => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         toast.success('Product has been deleted')
         refetch()
       })

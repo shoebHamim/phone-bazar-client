@@ -1,4 +1,6 @@
 import React, { useContext } from 'react';
+import { toast } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import verify from './verify.png'
 const Product = ({ product,userType, setSelectedItem,pay,deleteProduct,handleAdvertise }) => {
   const { name,status, location,advertise, resale_price, original_price, years_used, posting_time, seller_name, verified, img } = product
@@ -8,8 +10,9 @@ const Product = ({ product,userType, setSelectedItem,pay,deleteProduct,handleAdv
         method:'PUT'
       })
       .then(res=>res.json())
-      .then(data=>console.log(data))
+      .then(data=>toast.success('Product has been reported to the admin !'))
   }
+
 
   return (
     <div>
@@ -50,12 +53,13 @@ const Product = ({ product,userType, setSelectedItem,pay,deleteProduct,handleAdv
             } htmlFor="booking-modal" className="btn btn-primary">Book Now!</label>
             </>
             }
-            {pay &&
-            <label onClick={() => {
-              setSelectedItem(product)
+            {(pay && pay.paymentStatus!=='paid')&&
+            <Link to={`/dashboard/payment/${pay._id}`} className='btn btn-primary'>Pay</Link>
+            }{(pay && pay.paymentStatus=='paid')&&
+            <Link disabled className='btn btn-primary'>Paid</Link>
             }
-            } htmlFor="booking-modal" className="btn btn-primary">Pay</label>
-            }{
+
+            {
               deleteProduct && <label onClick={() => deleteProduct(product._id)
               } htmlFor="booking-modal" className="btn btn-primary">Delete</label>
             }
