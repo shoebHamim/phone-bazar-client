@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 
 const Checkout = ({ booking }) => {
-  console.log(booking.product._id);
+
   const price=booking.product.resale_price
   const name=booking.name
   const email=booking.email
@@ -72,7 +72,7 @@ const Checkout = ({ booking }) => {
       setProcessing(false)
       return
     }
-    console.log(paymentIntent);
+    // console.log(paymentIntent);
     if(paymentIntent.status==="succeeded"){
       const payment={
         price,

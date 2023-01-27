@@ -29,6 +29,7 @@ const DashboardLayout = () => {
           <ul className="menu p-4 w-56 bg-base-100 text-base-content">
             {/* admin */}
             {userType === 'admin' && <>
+            <Link to={'./my-orders'}>My Orders</Link>
               <Link to='./all-sellers'><li>All Sellers</li></Link>
               <Link to='./all-buyers'>
                 <li>All Buyers</li>
@@ -37,6 +38,7 @@ const DashboardLayout = () => {
             </>}
             {/* seller */}
             {userType === 'seller' && <>
+            <Link to={'./my-orders'}>My Orders</Link>
               <Link to={'./add-product'}>Add a Product</Link>
               <Link to={'./my-products'}>My Products</Link>
             </>}

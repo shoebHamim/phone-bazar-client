@@ -14,7 +14,7 @@ const Products = () => {
   const products=useLoaderData()
   const [selectedItem,setSelectedItem]=useState()
   return (
-    <div className='grid grid-cols-2 gap-8'>
+    <div className='grid sm:grid-cols-2 gap-8'>
       {products.map(p=><Product userType={userType} setSelectedItem={setSelectedItem} key={p._id} product={p}></Product>)}
       <BookingModal selectedItem={selectedItem} user={user}></BookingModal>
     </div>

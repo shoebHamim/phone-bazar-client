@@ -19,7 +19,6 @@ const AddProducts = () => {
     .then(res=>res.json())
     .then(data=>setUser_db(data))
   },[])
-  console.log(user_db);
   
  
   const onSubmit = (data) => {

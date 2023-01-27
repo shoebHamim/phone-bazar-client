@@ -12,7 +12,7 @@ queryFn:async()=>{
   const data = await res.json()
   return data
 }})
-console.log(reportedItems);
+
 if(reportedItems.message){
   return <div className='text-2xl text-red-600'>{reportedItems.message}</div>
 }
